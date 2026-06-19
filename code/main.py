@@ -24,7 +24,7 @@ for i, row in df.iterrows():
     elif obj == "package":
          part = "box"
     else:
-         part = "unknown""
+         part = "unknown"
 
     results.append({
         "claim_id": claim_id,
