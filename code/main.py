@@ -11,7 +11,7 @@ for i, row in df.iterrows():
     claim_id = row.get("claim_id", i)
 
     conversation = str(row.get("claim_description", "")).lower()
-    obj = str(row.get("object_type", "")).lower()
+    obj = str(row.get("object_type", "")).lower().strip()
 
     
     decision = "supported"
