@@ -1,7 +1,6 @@
 import pandas as pd
 import os
 
-
 INPUT_FILE = "../dataset/claims.csv"
 OUTPUT_FILE = "../output.csv"
 
@@ -12,28 +11,30 @@ results = []
 for i, row in df.iterrows():
     claim_id = row.get("claim_id", i)
 
-    conversation = str(row.get("conversation", "")).lower()
+    conversation = str(row.get("claim_description", "")).lower()
 
     issue_type = "unknown"
     part = "unknown"
     decision = "not_enough_info"
     severity = "low"
 
-    if "crack" in conversation or "broken" in conversation:
+    if any(word in conversation for word in ["crack", "broken", "damage"]):
         issue_type = "crack"
         decision = "supported"
         severity = "high"
 
-    elif "scratch" in conversation:
+    elif any(word in conversation for word in ["scratch", "scratched"]):
         issue_type = "scratch"
         decision = "supported"
         severity = "low"
 
-    if "car" in conversation:
+    obj = str(row.get("object_type", "")).lower()
+
+    if "car" in obj:
         part = "car_body"
-    elif "laptop" in conversation:
+    elif "laptop" in obj:
         part = "screen"
-    elif "package" in conversation:
+    elif "package" in obj:
         part = "box"
 
     results.append({
