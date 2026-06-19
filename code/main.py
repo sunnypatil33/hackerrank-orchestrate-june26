@@ -8,10 +8,10 @@ df = pd.read_csv(INPUT_FILE)
 results = []
 
 for i, row in df.iterrows():
-    claim_id = row.get("claim_id", i)
+    claim_id = i
 
-    conversation = str(row.get("claim_description", "")).lower()
-    obj = str(row.get("object_type", "")).lower()
+    conversation = str(row.get("user_claim", "")).lower()
+    obj = str(row.get("claim_object", "")).lower()
 
     decision = "supported"
     issue_type = "damage"
@@ -19,9 +19,9 @@ for i, row in df.iterrows():
 
     text = conversation + " " + obj
 
-    if "car" in text or "vehicle" in text:
+    if "car" in text:
         part = "car_body"
-    elif "laptop" in text or "computer" in text:
+    elif "laptop" in text:
         part = "screen"
     elif "package" in text or "box" in text:
         part = "box"
@@ -39,4 +39,4 @@ for i, row in df.iterrows():
 out = pd.DataFrame(results)
 out.to_csv(OUTPUT_FILE, index=False)
 
-print("DONE OUTPUT!")
+print("FINAL DONE!")
