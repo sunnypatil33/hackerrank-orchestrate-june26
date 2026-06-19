@@ -11,20 +11,20 @@ for i, row in df.iterrows():
     claim_id = row.get("claim_id", i)
 
     conversation = str(row.get("claim_description", "")).lower()
-    obj = str(row.get("object_type", "")).lower()
-
+    obj = str(row.get("object_type", "")).lower().strip()
+    
     decision = "supported"
     issue_type = "damage"
     severity = "medium"
 
-    if "car" in obj:
-        part = "car_body"
-    elif "laptop" in obj:
-        part = "screen"
-    elif "package" in obj:
-        part = "box"
+    if obj == "car":
+         part = "car_body"
+    elif obj == "laptop":
+         part = "screen"
+    elif obj == "package":
+         part = "box"
     else:
-        part = "unknown"
+         part = "unknown""
 
     results.append({
         "claim_id": claim_id,
