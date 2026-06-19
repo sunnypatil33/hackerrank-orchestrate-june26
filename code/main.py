@@ -17,14 +17,14 @@ for i, row in df.iterrows():
     issue_type = "damage"
     severity = "medium"
 
-    if obj == "car":
-         part = "car_body"
-    elif obj == "laptop":
-         part = "screen"
-    elif obj == "package":
-         part = "box"
+    if "car" in obj:
+        part = "car_body"
+    elif "laptop" in obj:
+        part = "screen"
+    elif "package" in obj:
+        part = "box"
     else:
-         part = "unknown"
+        part = "unknown"
 
     results.append({
         "claim_id": claim_id,
