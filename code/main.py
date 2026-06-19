@@ -11,18 +11,19 @@ for i, row in df.iterrows():
     claim_id = row.get("claim_id", i)
 
     conversation = str(row.get("claim_description", "")).lower()
-    obj = str(row.get("object_type", "")).lower().strip()
+    obj = str(row.get("object_type", "")).lower()
 
-    
     decision = "supported"
     issue_type = "damage"
     severity = "medium"
 
-    if "car" in obj or "vehicle" in obj:
+    text = conversation + " " + obj
+
+    if "car" in text or "vehicle" in text:
         part = "car_body"
-    elif "laptop" in obj or "computer" in obj:
+    elif "laptop" in text or "computer" in text:
         part = "screen"
-    elif "package" in obj or "box" in obj:
+    elif "package" in text or "box" in text:
         part = "box"
     else:
         part = "unknown"
