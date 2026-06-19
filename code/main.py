@@ -18,16 +18,23 @@ for i, row in df.iterrows():
     decision = "not_enough_info"
     severity = "low"
 
-    if any(word in conversation for word in ["crack", "broken", "damage"]):
-        issue_type = "crack"
+
+    if any(word in conversation for word in ["crack", "broken", "damage", "shattered"]):
+        issue_type = "damage"
         decision = "supported"
         severity = "high"
 
-    elif any(word in conversation for word in ["scratch", "scratched"]):
+    elif any(word in conversation for word in ["scratch", "scratched", "minor"]):
         issue_type = "scratch"
         decision = "supported"
         severity = "low"
 
+    elif any(word in conversation for word in ["dent", "hit", "fell", "issue", "problem"]):
+        issue_type = "damage"
+        decision = "supported"
+        severity = "medium"
+
+    
     obj = str(row.get("object_type", "")).lower()
 
     if "car" in obj:
